@@ -118,6 +118,9 @@ copied email threads. Live connectors are optional.
 You do not need all of these to start. The first useful path should work from a
 single export, uploaded file, or pasted message.
 
+For the roadmap from export-based v0 to upstream-style tool actions, see
+[`docs/connector-parity-spec.md`](docs/connector-parity-spec.md).
+
 ## What it outputs
 
 v0 is memo-only. Claude Code should not produce tool-specific import CSVs,

@@ -11,6 +11,7 @@
     ".claude-plugin",
     ".mcp.json",
     "bin",
+    "docs/connector-parity-spec.md",
     "docs/install",
     "docs/walkthrough",
     "outputs",
