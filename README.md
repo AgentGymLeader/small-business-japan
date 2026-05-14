@@ -1,3 +1,9 @@
+> 🇯🇵 **日本語で読む → [README.ja.md](README.ja.md)**
+>
+> 日本の中小企業・個人事業主向けの Claude Code プラグインです。15 のコマンド・15 のスキルを日本の商慣習と法令に準拠して収録しています。
+
+🇺🇸 English version below.
+
 # Small Business Japan Plugin
 
 Small Business Japan is a Japan-local companion to Anthropic's open-source
@@ -28,46 +34,43 @@ upstream maintainers adopt it, treat the distribution channel as unofficial.
 
 ### Cowork
 
-Expected path: use the same prompt-driven `npx` helper flow as a companion
-package, then let the host read the local plugin tree.
+Paste this prompt directly into Cowork:
+
+```
+Please set up Small Business Japan on this machine.
+
+Use this package name:
+@agentgymleader/small-business-japan
+
+This is a community contribution by @agentgymleader and has not been adopted into the marketplace yet.
+
+Check node/npm/npx, run doctor, and run a connector-free dry run.
+
+Do not send, file, post, pay, update CRM, or submit anything to an external service.
+Do not print tokens, API keys, private repo contents, customer data, or internal URLs.
+```
 
 ### Claude Code
 
-Use `npx` as a temporary command runner:
+Paste the same prompt into Claude Code, or use the Japanese prompt in
+`docs/install/claude-code-install-prompt.ja.md`.
+
+For manual installation:
 
 ```bash
 npx @agentgymleader/small-business-japan doctor
 npx @agentgymleader/small-business-japan print-claude-code-prompt
 ```
 
-For local development before npm publication:
-
-```bash
-node bin/small-business-japan.js doctor
-node bin/small-business-japan.js print-claude-code-prompt
-```
-
-Then paste the printed prompt into Claude Code. The prompt makes Claude Code run
-the checks itself and treat Small Business Japan as a community contribution,
-not an official marketplace plugin until upstream adoption.
-
-For a connector-free local smoke test:
-
-```bash
-claude plugin validate .
-python scripts/validate_small_business_japan.py
-```
-
-The full Japanese paste prompt is in
-`docs/install/claude-code-install-prompt.ja.md`.
+Then paste the printed prompt into Claude Code.
 
 ### Data privacy
 
-This pack can work from bank CSVs, invoice PDFs, customer emails, and pasted
+This pack works from bank CSVs, invoice PDFs, customer emails, and pasted
 business context. Those inputs may contain personal data, customer data, or
-confidential business information. Use your organization's LLM/data policy,
-redact unnecessary details, and do not paste secrets, tokens, private repository
-content, or internal URLs.
+confidential business information. Follow your organization's AI/data policy,
+redact unnecessary details, and do not paste passwords, API keys, private
+repository contents, or internal URLs.
 
 ## What you'll need to connect
 
@@ -156,11 +159,9 @@ Three layers work together:
 ## All 15 commands
 
 Commands are workflows that chain skills together. Each one is designed to pause
-before external action. The Starter Pack currently includes the front-door skill
-and router skill, `smb-onboard-jp` and `smb-router-jp`. The command tables below
-are the proposed Japan-local target set. Public command names are Japanese;
-ASCII skill slugs remain internal filesystem identifiers. Commands without a
-`SKILL.md` are roadmap entries until implemented.
+before external action. Public command names are Japanese; ASCII skill slugs
+remain internal filesystem identifiers. All 15 commands have a corresponding
+`SKILL.md` and are ready to use.
 
 ### Money & finance
 
@@ -199,10 +200,9 @@ ASCII skill slugs remain internal filesystem identifiers. Commands without a
 
 ## All 15 skills
 
-Skills are atomic building blocks. The table below is the target Small Business
-Japan skill surface backed by output contracts. This starter currently ships
-executable `SKILL.md` files for `smb-onboard-jp` and `smb-router-jp`; the rest
-are documented contracts until implemented.
+Skills are atomic building blocks. The table below is the complete Small Business
+Japan skill surface. All 15 skills ship executable `SKILL.md` files and are
+ready to use.
 
 ### Money & finance
 
