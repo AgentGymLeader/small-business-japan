@@ -95,6 +95,16 @@ README_HEADINGS = [
     "## Customizing",
 ]
 
+JA_README_HEADINGS = [
+    "## インストール",
+    "## はじめに必要なもの",
+    "## 出力されるもの",
+    "## 動き方",
+    "## 15個のコマンド",
+    "## 15個のスキル",
+    "## 自社向けに調整する",
+]
+
 BOUNDARY_TERMS = [
     "does not provide financial, tax, legal",
     "does not represent you",
@@ -103,11 +113,10 @@ BOUNDARY_TERMS = [
 ]
 
 JA_BOUNDARY_TERMS = [
-    "助言を提供するものではありません",
-    "代理",
-    "提出",
-    "外部送信",
-    "明示承認",
+    "経営判断を代わりに行う",
+    "申請",
+    "外部",
+    "オーナーの確認",
 ]
 
 FORBIDDEN_PUBLIC_CLAIMS = [
@@ -133,7 +142,7 @@ INSTALL_TERMS = [
 
 EN_INSTALL_TERMS = ["community contribution"]
 
-JA_INSTALL_TERMS = ["@agentgymleader", "配布経路は非公式"]
+JA_INSTALL_TERMS = ["@agentgymleader", "非公式の配布"]
 
 PRIVACY_TERMS = ["Data privacy", "customer data", "confidential business information"]
 
@@ -144,7 +153,7 @@ OUTPUT_TERMS = [
 
 EN_OUTPUT_TERMS = ["tool-specific import CSV"]
 
-JA_OUTPUT_TERMS = ["特定tool向けimport CSV"]
+JA_OUTPUT_TERMS = ["memo-only", "項目の対応"]
 
 JA_COMMANDS = [
     "/支払準備",
@@ -230,13 +239,13 @@ def main() -> int:
 
     ja_readme = require_file("README.ja.md")
     ja_text = ja_readme.read_text(encoding="utf-8")
-    for heading in README_HEADINGS:
+    for heading in JA_README_HEADINGS:
         require_contains(ja_text, heading, ja_readme)
     for term in JA_BOUNDARY_TERMS:
         require_contains(ja_text, term, ja_readme)
-    for term in INSTALL_TERMS + JA_INSTALL_TERMS + OUTPUT_TERMS + JA_OUTPUT_TERMS + JA_COMMANDS:
+    for term in INSTALL_TERMS + JA_INSTALL_TERMS + JA_OUTPUT_TERMS + JA_COMMANDS:
         require_contains(ja_text, term, ja_readme)
-    for term in ["Data privacy", "個人情報", "顧客情報", "機密情報"]:
+    for term in ["データの扱い", "個人情報", "顧客情報", "機密情報"]:
         require_contains(ja_text, term, ja_readme)
 
     install_prompt = require_file("docs/install/claude-code-install-prompt.ja.md")

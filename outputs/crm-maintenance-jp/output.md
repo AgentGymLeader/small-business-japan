@@ -10,6 +10,7 @@ Every generated output must begin with:
 ```text
 Small Business Japan by @agentgymleader. Community contribution; distribution is unofficial until upstream adoption.
 Purpose: discussion memo for owner and, where needed, qualified professionals. Not advice, filing, submission, representation, final determination, or external sending.
+目的: オーナーおよび必要に応じて担当士業と確認するための整理メモです。助言・申請・代行・最終判断・外部送信は行いません。
 Research checked: 2026-05-14. If this date is older than 180 days, treat legal/tax/labor/privacy/advertising review points as stale and refresh sources before use.
 ```
 
