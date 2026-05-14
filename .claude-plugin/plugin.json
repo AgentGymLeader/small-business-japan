@@ -1,0 +1,20 @@
+{
+  "name": "small-business-japan",
+  "version": "0.1.0",
+  "description": "Japan-local small-business workflows for Claude Cowork and Claude Code. Starter Pack includes read-only onboarding, routing, bilingual README, output contract, and research dossiers. Users connect or provide their own tools, files, CSVs, PDFs, and pasted context.",
+  "author": {
+    "name": "@agentgymleader"
+  },
+  "repository": "https://github.com/AgentGymLeader/small-business-japan",
+  "homepage": "https://github.com/AgentGymLeader/small-business-japan#readme",
+  "license": "Apache-2.0",
+  "keywords": [
+    "smb",
+    "small-business",
+    "japan",
+    "back-office",
+    "workflow",
+    "draft-only",
+    "owner-approval"
+  ]
+}

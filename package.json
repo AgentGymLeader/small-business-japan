@@ -1,0 +1,29 @@
+{
+  "name": "@agentgymleader/small-business-japan",
+  "version": "0.1.0",
+  "description": "Connector-free starter workflow pack for Japanese small businesses.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "small-business-japan": "bin/small-business-japan.js"
+  },
+  "files": [
+    ".claude-plugin",
+    ".mcp.json",
+    "bin",
+    "docs/install",
+    "docs/walkthrough",
+    "outputs",
+    "redteam",
+    "research",
+    "skills",
+    "LICENSE.md",
+    "NOTICE.md",
+    "README.md",
+    "README.ja.md"
+  ],
+  "scripts": {
+    "doctor": "node bin/small-business-japan.js doctor",
+    "prompt": "node bin/small-business-japan.js print-claude-code-prompt"
+  }
+}
