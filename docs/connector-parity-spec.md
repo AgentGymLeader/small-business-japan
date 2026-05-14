@@ -103,10 +103,27 @@ policy checks, sidecar staging, audit logs, and approval gates.
 |---|---|---|---|
 | Payroll / cash planning | QuickBooks, PayPal | freee, Money Forward Cloud, Yayoi, bank CSV, Stripe, PayPal, Square, STORES, AirPAY | L1 read cash/invoice/payment records, L2 memo, L3 payment/reminder queue only |
 | Month-end close | QuickBooks, PayPal, Google Drive | freee, Money Forward Cloud, Yayoi, Google Drive, OneDrive, receipt folders | L1 read ledger/bank/invoice exports, L2 close memo, L3 accountant packet folder draft |
-| Invoice chasing | QuickBooks, PayPal, email | Misoca, freee invoices, MF Cloud Invoice, MakeLeaps, BtoB Platform Invoice, Stripe, PayPal, Gmail, Outlook | L1 read invoice/payment status, L2 draft reminder, L3 email draft/queue |
-| Business pulse / briefs | QuickBooks, PayPal, HubSpot, Calendar, Slack | freee/MF/Yayoi, HubSpot, kintone, Salesforce, Google Calendar, Outlook Calendar, Slack, Chatwork, LINE WORKS | L1 read, L2 brief, L3 scheduled draft message |
+| Invoice chasing | QuickBooks, PayPal, email | Misoca, freee invoices, MF Cloud Invoice, MakeLeaps, Stripe, PayPal, Gmail, Outlook | L1 read invoice/payment status, L2 draft reminder, L3 email draft/queue |
+| Business pulse / briefs | QuickBooks, PayPal, HubSpot, Calendar, Slack | freee/MF/Yayoi, HubSpot, kintone, Google Calendar, Outlook Calendar, Slack, Chatwork, LINE WORKS | L1 read, L2 brief, L3 scheduled draft message |
 | Campaign execution | QuickBooks, HubSpot, Canva | HubSpot, kintone, Salesforce, Google Sheets, Canva, Google Slides | L1 read sales/CRM, L2 campaign draft, L3 Canva/CRM/newsletter draft |
 | Contract handling | Docusign | CloudSign, GMO Sign, freee Sign, DocuSign | L1 status read, L2 issue memo, L3 envelope draft only |
+
+Initial v1 scope should stay close to the SMB daily-tool surface. BtoB Platform
+Invoice is a procurement and trading-network candidate rather than a default
+SMB first-wave connector, so it belongs in a later enterprise/procurement track.
+Salesforce and Zoho CRM are valid later candidates, but HubSpot and kintone are
+the v1 Japan SMB core.
+
+Known tradeoffs:
+
+- Delaying BtoB Platform Invoice may underserve procurement-heavy companies and
+  users already operating inside that trading network. This is accepted for v1
+  because the first release optimizes for smaller owner-operated workflows.
+- Delaying Figma narrows the agency/designer-team surface. This is accepted for
+  v1 because Canva and Google Slides cover the broader SMB content path.
+- Keeping e-sign final execution in the target product adds last-mile friction.
+  This is accepted for v1 to preserve a clearer Japan boundary around authority,
+  identity, signature execution, and audit evidence.
 
 ## Domain Capability Targets
 
@@ -141,13 +158,19 @@ Finance connector research on 2026-05-14 produced this parity map:
 | Yayoi | linked accounts, CSV, smart transaction import data | unconfirmed transaction candidates | general accounting write API unclear; Misoca handles invoice API | treat as import/manual-review first |
 | Misoca | invoice/estimate/delivery docs, partners | invoice/document draft, PDF preview | OAuth write-scope create/update | token expiry, write-scope separation, invoice/Peppol fields |
 | MakeLeaps | partners, docs, history, receivables, exports | quote/invoice/mail request draft, approval flow | create/edit/export/mailing where supported | mailing/posting/payment status needs approval |
-| BtoB Platform Invoice | invoice lists/data, issuer, formats | receiving/issuing/approval/accounting-link candidates | invoice registration/issuance APIs | separate receipt, issue, approval, e-record storage |
 | Stripe | invoices, payments, refunds, balances, payment links | invoice draft, payment link draft, reminder/refund proposal | invoice send, payment link create, refund | never assume Stripe invoice alone satisfies Japan qualified-invoice needs |
 | PayPal | settlements, transactions, invoices, disputes, refunds | invoice draft, reminder, dispute response proposal | invoice send, refund, dispute action | Japan feature differences, PII, disputes/refunds strong approval |
 | Square | payments, refunds, orders, invoices, payouts | invoice draft, checkout/refund proposal | invoice publish, refund | invoice payment/status API limits, publish/refund approval |
 | STORES | payment results, deposits, accounting/POS links | POS/payment request, accounting-link candidate | SDK payment flows; back-office write limited | PCI-DSS, device/app-led actions, refund scope confirmation |
 | AirPAY / Airレジ | sales, payment fees, deposit schedule, accounting-link data | sales journal candidate | Airレジ API is mostly data integration; AirPAY write limited | daily close, fee differences, settlement matching |
 | Bank CSV | statements, balances, transfer result CSV | journal candidate, reconciliation candidate, Zengin transfer-file draft | none by default | duplicate transfer prevention, kana name checks, bank/API regulation |
+
+Later finance/procurement candidates:
+
+- BtoB Platform Invoice: useful for invoice receiving/issuing networks and
+  procurement-heavy companies, but not first-wave SMB scope. Revisit after the
+  core freee/Money Forward/Yayoi/Misoca/MakeLeaps/Stripe/PayPal/Square paths are
+  stable.
 
 Research sources:
 
@@ -213,6 +236,8 @@ MVP gate:
   CRM writes.
 - Japan-specific gates add 稟議/複数承認, 敬語/宛先確認, APPI利用目的, and
   cross-SaaS citation checks.
+- v1 CRM scope should prioritize HubSpot and kintone. Salesforce is useful but
+  enterprise-heavy; Zoho CRM can remain a later compatibility candidate.
 
 Research sources:
 
@@ -251,9 +276,12 @@ Japan constraints:
   advertising clearance.
 - Canva should remain the primary design connector. A Japan-only Canva clone is
   not needed.
-- Figma and Google Slides are review/handoff targets by default. Do not treat
-  Figma as Canva-equivalent generation/write infrastructure unless an explicit
-  plugin/API path supports that safely.
+- Google Slides can ride the Google Workspace path as a presentation/handoff
+  target.
+- Figma is not v1 SMB connector scope. Keep it as an agency/designer-team
+  reference or handoff target only; do not treat it as Canva-equivalent
+  generation/write infrastructure unless an explicit plugin/API path and user
+  segment justify it later.
 - Canva outputs must preserve asset/license review. Pro assets, templates,
   AI-generated assets, brand kit use, export, publish, and template resale must
   remain approval-gated.
@@ -264,9 +292,11 @@ Japan constraints:
   counterparty metadata, approval history.
 - L2 draft: Hold / Escalate / CEO confirmation memo, missing facts, counsel
   questions.
-- L3 stage: envelope draft, signature request draft, folder filing draft.
+- L3 stage: envelope draft, text-transfer packet, signature request draft, and
+  folder filing draft. L3 must remain visibly unsent and unsigned.
 - L4 approved write: send envelope or file executed copy only with authority,
-  identity, and approval checks.
+  identity, and approval checks. For v1, final signature execution stays with
+  the user in the target e-sign product.
 
 Japan constraints:
 
@@ -278,6 +308,11 @@ Japan constraints:
 - Use a common e-sign abstraction for CloudSign, GMO Sign, freee Sign, and
   DocuSign: `read -> draft -> stage -> human approve -> send -> status ->
   executed-copy filing`.
+- In Japan v1, "stage" means text transfer and envelope preparation, not signing
+  on behalf of the user and not silently sending a signature request.
+- If the user edits the staged envelope inside the e-sign product before final
+  execution, the connector must re-read or compare the envelope before filing
+  status, audit evidence, or executed copies.
 - Split approval for `send signature request` and `accept/file executed copy`.
   They are different risk moments.
 - If bulk sending is supported, approval must be per-recipient or per-batch with
@@ -359,8 +394,8 @@ Deterministic policy executes.
 SubAgent connector research should fill these before implementation:
 
 - Official API and marketplace terms for freee, Money Forward Cloud, Yayoi,
-  Misoca, MakeLeaps, BtoB Platform Invoice, CloudSign, GMO Sign, freee Sign,
-  kintone, Chatwork, and LINE WORKS.
+  Misoca, MakeLeaps, CloudSign, GMO Sign, freee Sign, kintone, Chatwork, and
+  LINE WORKS.
 - Whether each tool supports draft/staged objects separately from final writes.
 - Whether each tool exposes audit logs and approval workflows through API.
 - Whether connector access can inherit end-user permissions or only service
@@ -374,8 +409,9 @@ SubAgent research on 2026-05-14 found:
 - Upstream parity is high for Canva and DocuSign because Anthropic publicly
   describes Canva asset generation and Docusign contract send/status/filing
   flows.
-- Canva should be the first design write/stage target. Figma and Google Slides
-  are safer as read/comment/handoff/stage targets.
+- Canva should be the first design write/stage target. Google Slides can be a
+  Workspace handoff/stage target. Figma stays outside v1 and should be treated
+  as a later agency/designer-team reference path.
 - CloudSign, GMO Sign, freee Sign, and DocuSign all map cleanly to the e-sign
   abstraction, but plans/API availability and workflow states differ by vendor.
 - freee Sign exposes statuses such as draft/confirmation flows; approval gates
