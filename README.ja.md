@@ -136,7 +136,7 @@ Small Business Japan は、3つの層で動きます。
 
 Commands は、複数の Skills を組み合わせた業務の流れです。どのコマンドも、外部への送信・投稿・支払い・更新・共有の前に止まる設計です。
 
-Starter Pack に現在入っている実行可能な入口スキルは、`smb-onboard-jp` と `smb-router-jp` です。下の表は、日本向けに想定しているコマンド一覧です。公開されるコマンド名は日本語で、ASCII の skill slug はファイルシステム上の内部識別子として残します。`SKILL.md` がないコマンドは、実装前のロードマップ項目です。
+下の表は、Small Business Japan が実装している 15 のコマンド一覧です。公開されるコマンド名は日本語で、ASCII の skill slug はファイルシステム上の内部識別子として残します。すべてのコマンドに対応する `SKILL.md` が入っています。
 
 ### お金・経理
 
@@ -175,7 +175,7 @@ Starter Pack に現在入っている実行可能な入口スキルは、`smb-on
 
 ## 15個のスキル
 
-Skills は、1つの目的に集中した小さな部品です。下の表は、Small Business Japan が目指している日本向けスキルの一覧です。現在の Starter Pack で実行可能な `SKILL.md` が入っているのは、`smb-onboard-jp` と `smb-router-jp` です。それ以外は、実装前の出力ルールとして扱います。
+Skills は、1つの目的に集中した小さな部品です。下の表は、Small Business Japan が実装している 15 のスキル一覧です。すべてに `SKILL.md` が入っており、すぐに使えます。
 
 ### お金・経理
 
