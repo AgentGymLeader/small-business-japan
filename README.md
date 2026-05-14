@@ -260,3 +260,9 @@ them to your business:
 - **Keep approval gates**: sends, posts, refunds, CRM writes, contract changes,
   payroll decisions, filings, and professional communications stay under owner
   approval.
+
+## Contributing
+
+If you find an error, an outdated regulation, or a missing use case, contributions
+are welcome. Open an issue or pull request at
+https://github.com/AgentGymLeader/small-business-japan
